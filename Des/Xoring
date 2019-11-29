@@ -1,0 +1,61 @@
+/*
+    Copyright (c) 2019 - Luca Bernardini
+  
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+
+public class Xoring {
+ 
+	// char is 16 bits unsigned integers representing UTF-16 code units
+	// from '\u0000' to '\uffff' inclusive, that is, from 0 to 65535
+	
+	public static void printBitsChar(char a)
+	{
+		byte bit;
+		for(int x = 15; x >= 0; x--)
+		{
+			// >>> the logical shift to the right shifts the bit to the right
+			// the number of positions specified by x and fills from the left with 0s
+			
+			bit = (byte)((a >>> x) & 0x0001);
+			System.out.print(bit);
+		}
+		System.out.println("");
+		
+		
+	}
+	
+	public static char xoringChar(char car, char key)
+	{
+		// xoring unsigned 16 bits 
+		char xoredChar = (char)(car ^ key);
+		return xoredChar;
+	}
+		
+	
+	public static void main(String[] args) {
+		System.out.println("Bits clear representation ");
+		printBitsChar('a');
+		char xoredChar = xoringChar('a', 'b');
+		System.out.println("Bits encrypted representation ");
+		printBitsChar(xoredChar);
+		char xoredCharClear = xoringChar(xoredChar, 'b');
+		System.out.println("Again Bits clear representation ");
+		printBitsChar(xoredCharClear);
+		
+		
+
+	}
+
+}
